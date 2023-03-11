@@ -139,3 +139,74 @@ header{
 .timer-button:active {
     transform: scale(0.96);
 }
+
+.info{
+    padding: 1rem;
+    padding-top: 0;
+    max-width: 480px;
+    margin: auto;
+}
+.info-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: .5rem;
+}
+.info-pomo-count{
+    color: rgb(191, 166, 166);
+    font-size: 1.2rem;
+}
+.info-pomo-advice{  
+    color: rgb(255, 255, 255);
+}
+.task{
+    padding: 1rem;
+    max-width: 480px;
+    margin: auto;
+}
+.task-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.task-top-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.729);
+}
+.task-top-container h3{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    padding-bottom: .3rem;
+}
+.task-button{
+    display: flex;
+    padding: .4rem .7rem;
+    margin-bottom: .5rem;
+    background-color: rgba(255, 255, 255, 0.393);
+}
+.task-button i{
+    font-size: 1.2rem;
+}
+.task-add{
+    display: flex;
+    justify-content: center;
+    gap: .4rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 3px dashed rgba(255, 255, 255, 0.2);
+}
+.task-add i , .task-add p{
+    color: rgba(255, 255, 255, 0.594);
+}
+.task-add p{
+    font-family: Roboto;
+    font-weight: 900;
+}
