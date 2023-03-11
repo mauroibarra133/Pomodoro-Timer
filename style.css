@@ -31,20 +31,111 @@ header{
 .header-report,.header-settings,.header-login{
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 
 }
 
 .header-logo i{
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .timer{
-    margin-top: 3rem;
+    margin-top: 1rem;
     padding: 1rem;
 }
 .timer-container{
-    background-color: rgba(98, 34, 34, 0.893);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 1rem;
-
+    margin: auto;
+    max-width: 480px;
+    
+}
+.timer-top{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.timer-pomo{
+    color: white;
+    font-size: .6rem;
+    font-family: sans-serif;
+}
+.timer-pomo-active{
+    padding: .4rem;
+    background-color: rgba(0,0,0,0.2);
+    border-radius:6px;
+}
+.timer-center{
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    font-size: 5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 1rem 0;
+}
+.timer-bottom{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.timer-button {
+    position: relative;
+    margin: auto;
+    padding: 19px 22px;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+}
+.timer-button:hover{
+    color: #f2a7a7;
+}
+.timer-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 28px;
+    background: rgba(255, 171, 157, 0.1);
+    width: 56px;
+    height: 56px;
+    transition: all 0.3s ease;
+}
+.timer-button span {
+    position: relative;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+.timer-button svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #ffffff;
+    stroke-width: 2;
+    transform: translateX(-7px);
+    transition: all 0.3s ease;
+}
+.timer-button:hover:before{
+    width: 100%;
+    background: #ffffff;
+}
+.timer-button:hover svg {
+    transform: translateX(0);
+    stroke: #f2a7a7;
+}
+.timer-button:active {
+    transform: scale(0.96);
 }
