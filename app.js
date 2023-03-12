@@ -10,7 +10,10 @@ const shortTab = document.getElementById('timer-short');
 const longTab = document.getElementById('timer-long');
 //Timer
 const startButton = document.getElementById('timer-button')
+//Interval of the timer
 let idInterval;
+//Counter of the pomo number
+let pomoCount = 0;
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -100,23 +103,61 @@ function applyTabEffects(target){
 
     }
 }
+function nextTab(){
+    let pomoCounDiv = document.getElementById('info-pomo-count');
+    
+    for(let tab of [pomoTab,shortTab,longTab]){
+            if(tab.parentNode.matches('.timer-pomo-active')){
+                tab.parentNode.classList.toggle('timer-pomo-active');
 
+                if((tab.id == 'timer-pomo')){
+                    if (pomoCount % 3 == 0 && pomoCount!= 0){
+                        applyTabEffects(tab = longTab.parentNode)
+                        longTab.parentNode.classList.toggle('timer-pomo-active');
+                        pomoCount += 1
+                        pomoCounDiv.innerHTML = `#${pomoCount}`
+                        break;
+                    }else{
+                        applyTabEffects(tab = shortTab.parentNode)
+                        shortTab.parentNode.classList.toggle('timer-pomo-active');
+                        pomoCount += 1
+                        pomoCounDiv.innerHTML = `#${pomoCount}`
+
+                        break;
+                    }
+                    
+                }else if((tab.id == 'timer-short')){
+                    applyTabEffects(tab = pomoTab.parentNode)
+                    pomoTab.parentNode.classList.toggle('timer-pomo-active');
+                    break;
+                }else if((tab.id == 'timer-long')){
+                    applyTabEffects(tab = pomoTab.parentNode)
+                    pomoTab.parentNode.classList.toggle('timer-pomo-active');
+                    break;
+                }
+        }
+    }
+}
 function handleChronometer(){
     const timer = document.getElementById('timer-number');
+    const nextButton = document.getElementById('timer-next-button');
     let initialSeconds = Number.parseInt(timer.textContent.slice(0,2)) * 60;
+
     if (startButton.childNodes[1].innerHTML == 'START'){
         idInterval =setInterval(()=>{
             initialSeconds -=  1
             let minutes = Math.floor(initialSeconds / 60)
             let seconds = initialSeconds % 60
-            console.log();
             timer.innerHTML = `${minutes.toString().split('').length == 1 ? '0'+minutes : minutes}:${seconds.toString().split('').length == 1 ? '0'+seconds : seconds}`
         },1000)
         
         startButton.childNodes[1].innerHTML = 'PAUSE'
+        nextButton.style.opacity= '1'
+        nextButton.addEventListener('click',nextTab)
     }else{
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
+        nextButton.style.opacity= '0'
     }
 }
 

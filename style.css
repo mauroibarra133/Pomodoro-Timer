@@ -124,22 +124,24 @@ header{
     padding: 1rem 0;
 }
 .timer-bottom{
+    position: relative;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding: 1rem;
 }
 .timer-button {
     position: relative;
     margin: auto;
-    padding: 19px 22px;
+    padding: 14px 19px;
     transition: all 0.2s ease;
     color: #ffffff;
     text-decoration: none;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     align-items: center;
+
 }
 .timer-button:hover{
     color: var(----button-bg-hover);
@@ -152,8 +154,8 @@ header{
     display: block;
     border-radius: 28px;
     background: rgba(255, 171, 157, 0.1);
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     transition: all 0.3s ease;
 }
 .timer-button span {
@@ -187,6 +189,13 @@ header{
 }
 .timer-button:active {
     transform: scale(0.96);
+}
+.timer-next-button{
+    position: absolute;
+    left: calc(80%);
+    font-size: 1.6rem;
+    opacity: 0;
+    transition: opacity .5s ease-in;
 }
 
 .info{
