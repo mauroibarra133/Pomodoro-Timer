@@ -21,6 +21,20 @@ header{
     padding: 1rem ;
     border-bottom: 2px solid #f2a7a7;
 }
+.header-title{
+    font-size: 1.1rem;
+    color: white;
+    margin-left: .3rem;
+    font-weight: 900;
+    font-family: Roboto;
+}
+.header-title-report,.header-title-settings, .header-title-login{
+    color: white;
+    font-size: .7rem;
+    font-weight: 900;
+    margin-left: .2rem;
+    font-family: Roboto;
+}
 .header-logo,.header-sections{
     display: flex;
     align-items: center;
@@ -32,6 +46,8 @@ header{
     display: flex;
     align-items: center;
     font-size: 1.2rem;
+    background-color: rgba(235,235,235,0.2);
+    padding: .3rem .4rem;
 
 }
 
@@ -164,6 +180,7 @@ header{
     padding: 1rem;
     max-width: 480px;
     margin: auto;
+    padding-bottom: 0;
 }
 .task-container{
     display: flex;
@@ -199,7 +216,7 @@ header{
     justify-content: center;
     gap: .4rem;
     width: 100%;
-    padding: 1rem;
+    padding: .8rem;
     border-radius: 6px;
     border: 3px dashed rgba(255, 255, 255, 0.2);
 }
@@ -209,4 +226,41 @@ header{
 .task-add p{
     font-family: Roboto;
     font-weight: 900;
+}
+
+@media only screen and (min-width: 768px){
+    .timer{
+        padding: 1.2rem;
+    } 
+    .timer-container{
+    padding: 1.2rem;
+    }
+    .timer-pomo-active{
+        padding: .5rem;
+    }
+    .timer-pomo{
+        font-size: .65rem;
+    }
+    .timer-center{
+        font-size: 7rem;
+    }
+    .timer-button{
+        padding: 25px 28px;
+    }
+    .timer-button:before{
+        height: 60px;
+        width: 60px;
+    }
+    .timer-button span{
+        font-size: 20px;
+    }
+    .timer-button svg{
+        stroke-width: 3;
+    }
+    .timer-button:active{
+        transform: scale(.94);
+    }
+    .header-sections h2{
+        font-size: .75rem;
+    }
 }
