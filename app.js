@@ -1,5 +1,6 @@
 "use strict";
 
+
 //Conocimientos: API  de matchmedia,event manipulation,variables en css,DOM manipulation,
 // mediaQueries
 let mediaQuery400 = window.matchMedia("(min-width: 400px)");
@@ -149,6 +150,10 @@ function handleChronometer(){
             let minutes = Math.floor(initialSeconds / 60)
             let seconds = initialSeconds % 60
             timer.innerHTML = `${minutes.toString().split('').length == 1 ? '0'+minutes : minutes}:${seconds.toString().split('').length == 1 ? '0'+seconds : seconds}`
+            
+            if(timer.textContent == '00:00'){
+                nextTab();
+            }
         },1000)
         
         startButton.childNodes[1].innerHTML = 'PAUSE'
@@ -161,8 +166,7 @@ function handleChronometer(){
     }
 }
 function restartPomoCount(){
-    confirm('Está seguro que desea reestablecer la cuenta a 0?')
-    pomoCounDiv.innerHTML = '#0'
+    confirm('Está seguro que desea reestablecer la cuenta a 0?') == true ? pomoCounDiv.innerHTML = '#0' : null;
 }
 
 //runs when started

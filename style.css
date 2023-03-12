@@ -197,6 +197,9 @@ header{
     opacity: 0;
     transition: opacity .5s ease-in;
 }
+.timer-next-button:hover{
+    cursor: pointer;
+}
 
 .info{
     padding: 1rem;
