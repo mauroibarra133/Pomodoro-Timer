@@ -1,3 +1,6 @@
+:root{
+    --button-bg-hover: #f2a7a7
+}
 *{
     padding: 0;
     margin: 0;
@@ -6,13 +9,17 @@
 body{
     background-color: #ba4949;
     height: 100vh;
+    transition: background-color 0.5s ease-in-out 0s;
 }
 i{
     width: auto;
     height: auto;
     color: white;
 }
-
+a{
+    text-decoration: none;
+    color: white;
+}
 header{
     width: 100%;
     display: flex;
@@ -20,6 +27,12 @@ header{
     justify-content: space-between;
     padding: 1rem ;
     border-bottom: 2px solid #f2a7a7;
+}
+.header-logo-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .header-title{
     font-size: 1.1rem;
@@ -42,13 +55,19 @@ header{
 .header-sections{
     gap: 1.2rem;
 }
-.header-report,.header-settings,.header-login{
+.header-report a,.header-settings a,.header-login a{
     display: flex;
     align-items: center;
     font-size: 1.2rem;
-    background-color: rgba(235,235,235,0.2);
+    background-color: rgba(235,235,235,0.3);
     padding: .3rem .4rem;
-
+}
+.header-item{
+    border-radius: 4px;
+}
+.header-item:hover{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.2);
 }
 
 .header-logo i{
@@ -75,6 +94,16 @@ header{
     color: white;
     font-size: .6rem;
     font-family: sans-serif;
+}
+/* .timer-pomo:hover{
+    cursor: pointer;
+    background-color: rgba(100,100,100,.15);
+    padding: .4rem;
+    border-radius:6px;
+
+} */
+.timer-pomo:hover{
+    cursor: pointer;
 }
 .timer-pomo-active{
     padding: .4rem;
@@ -109,7 +138,7 @@ header{
     align-items: center;
 }
 .timer-button:hover{
-    color: #f2a7a7;
+    color: var(----button-bg-hover)
 }
 .timer-button:before {
     content: "";
@@ -150,7 +179,7 @@ header{
 }
 .timer-button:hover svg {
     transform: translateX(0);
-    stroke: #f2a7a7;
+    stroke: var(----button-bg-hover)
 }
 .timer-button:active {
     transform: scale(0.96);
@@ -248,7 +277,7 @@ header{
         padding: 25px 28px;
     }
     .timer-button:before{
-        height: 60px;
+        height: 65px;
         width: 60px;
     }
     .timer-button span{
@@ -263,4 +292,5 @@ header{
     .header-sections h2{
         font-size: .75rem;
     }
+
 }
