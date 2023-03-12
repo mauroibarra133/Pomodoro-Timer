@@ -215,6 +215,10 @@ header{
     color: var(--border-bottom-header);
     font-size: 1.2rem;
 }
+.info-pomo-count:hover{
+    cursor: pointer;
+}
+
 .info-pomo-advice{  
     color: rgb(255, 255, 255);
 }

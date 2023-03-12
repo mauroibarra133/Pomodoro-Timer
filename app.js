@@ -14,6 +14,7 @@ const startButton = document.getElementById('timer-button')
 let idInterval;
 //Counter of the pomo number
 let pomoCount = 0;
+const pomoCounDiv = document.getElementById('info-pomo-count');
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -104,7 +105,6 @@ function applyTabEffects(target){
     }
 }
 function nextTab(){
-    let pomoCounDiv = document.getElementById('info-pomo-count');
     
     for(let tab of [pomoTab,shortTab,longTab]){
             if(tab.parentNode.matches('.timer-pomo-active')){
@@ -160,7 +160,10 @@ function handleChronometer(){
         nextButton.style.opacity= '0'
     }
 }
-
+function restartPomoCount(){
+    confirm('Está seguro que desea reestablecer la cuenta a 0?')
+    pomoCounDiv.innerHTML = '#0'
+}
 
 //runs when started
 handleMediaQuery(mediaQuery400)
@@ -171,6 +174,6 @@ mediaQuery600.addEventListener('change',()=>{handleMediaQuery(mediaQuery600)});
 pomoTab.addEventListener('click',changeTab);
 shortTab.addEventListener('click',changeTab);
 longTab.addEventListener('click',changeTab);
-startButton.addEventListener('click',handleChronometer)
-
+startButton.addEventListener('click',handleChronometer);
+pomoCounDiv.addEventListener('click',restartPomoCount);
 
