@@ -57,30 +57,35 @@ function changeTab(e){
     target.classList.toggle('timer-pomo-active');
     applyTabEffects(target);
 }
+
 function applyTabEffects(target){
-    console.log(target);
     const backgroundPage = document.getElementById('body');
     const timerNumber = document.getElementById('timer-number')
     const timerAdvice = document.getElementById('timer-advice')
     const root = document.documentElement.style;
 
     if(target.childNodes[0].matches('#timer-short')){
-        backgroundPage.style.backgroundColor='#116320';
+        backgroundPage.style.backgroundColor='#31834f';
         timerNumber.innerHTML = '05:00'
         timerAdvice.innerHTML = 'Time to take a break!'
-        root.setProperty('----button-bg-hover','#116320')
+        root.setProperty('----button-bg-hover','#31834f')
+        root.setProperty('--border-bottom-header','#c9ecd6')
+
 
     }else if(target.childNodes[0].matches('#timer-pomo')){
         backgroundPage.style.backgroundColor='#ba4949';
         timerNumber.innerHTML = '25:00'
         timerAdvice.innerHTML = 'Time to focus!'
         root.setProperty('----button-bg-hover','#ba4949')
+        root.setProperty('--border-bottom-header','#ecc9c9')
 
     }else if(target.childNodes[0].matches('#timer-long')){
-        backgroundPage.style.backgroundColor='#31834f';
+        backgroundPage.style.backgroundColor='#84b6f4';
         timerNumber.innerHTML = '15:00'
         timerAdvice.innerHTML = 'Time to take a rest!'
-        root.setProperty('----button-bg-hover','#31834f')
+        root.setProperty('----button-bg-hover','#84b6f4')
+        root.setProperty('--border-bottom-header','#c9daec')
+
 
     }
 }

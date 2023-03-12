@@ -1,5 +1,7 @@
+
 :root{
-    --button-bg-hover: #f2a7a7
+    ----button-bg-hover: #ba4949;
+    --border-bottom-header: #ecc9c9;
 }
 *{
     padding: 0;
@@ -26,7 +28,9 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 1rem ;
-    border-bottom: 2px solid #f2a7a7;
+    border-bottom: 2px solid var(--border-bottom-header);
+    transition: border-bottom 0.5s ease-in-out 0s;
+
 }
 .header-logo-link{
     display: flex;
@@ -138,7 +142,7 @@ header{
     align-items: center;
 }
 .timer-button:hover{
-    color: var(----button-bg-hover)
+    color: var(----button-bg-hover);
 }
 .timer-button:before {
     content: "";
@@ -199,7 +203,7 @@ header{
     gap: .5rem;
 }
 .info-pomo-count{
-    color: rgb(191, 166, 166);
+    color: var(--border-bottom-header);
     font-size: 1.2rem;
 }
 .info-pomo-advice{  
