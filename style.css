@@ -162,7 +162,7 @@ header{
 
 }
 .timer-button:hover{
-    color: var(----button-bg-hover);
+    color: var(--bg-color);
 }
 .timer-button:before {
     content: "";
@@ -203,7 +203,8 @@ header{
 }
 .timer-button:hover svg {
     transform: translateX(0);
-    stroke: var(----button-bg-hover)
+    stroke:var(--bg-color);
+
 }
 .timer-button:active {
     transform: scale(0.96);
