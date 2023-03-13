@@ -251,6 +251,16 @@ function createModalTask(){
 
     })
         //SAVE
+    addingTaskInput.addEventListener('keypress',(e)=>{
+        if(addingTaskInput.value == ''){
+
+        }else{
+            if(e.key == 'Enter'){
+                addTask(addingTaskInput.value,addingTaskEstInput.value)
+                addingTaskInput.value = ''
+            }
+        }
+    })
     addingTaskButtonSave.addEventListener('click',()=>{
         if(addingTaskInput.value == ''){
 
