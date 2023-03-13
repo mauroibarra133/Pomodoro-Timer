@@ -16,7 +16,7 @@ let idInterval;
 //Counter of the pomo number
 let pomoCount = 0;
 const pomoCounDiv = document.getElementById('info-pomo-count');
-
+//
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -77,7 +77,7 @@ function applyTabEffects(target){
     if(target.childNodes[0].matches('#timer-short')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
-        backgroundPage.style.backgroundColor='#31834f';
+        root.setProperty('--bg-color','#31834f')
         timerNumber.innerHTML = '05:00'
         timerAdvice.innerHTML = 'Time to take a break!'
         root.setProperty('----button-bg-hover','#31834f')
@@ -87,7 +87,8 @@ function applyTabEffects(target){
     }else if(target.childNodes[0].matches('#timer-pomo')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
-        backgroundPage.style.backgroundColor='#ba4949';
+        root.setProperty('--bg-color','#ba4949')
+
         timerNumber.innerHTML = '25:00'
         timerAdvice.innerHTML = 'Time to focus!'
         root.setProperty('----button-bg-hover','#ba4949')
@@ -96,7 +97,7 @@ function applyTabEffects(target){
     }else if(target.childNodes[0].matches('#timer-long')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
-        backgroundPage.style.backgroundColor='#84b6f4';
+        root.setProperty('--bg-color','#84b6f4')
         timerNumber.innerHTML = '15:00'
         timerAdvice.innerHTML = 'Time to take a rest!'
         root.setProperty('----button-bg-hover','#84b6f4')
