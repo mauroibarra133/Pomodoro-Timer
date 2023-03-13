@@ -320,7 +320,7 @@ header{
     padding: .5rem;
     border-radius: 6px;
     border-color: var(--bg-color);
-    color: #000000
+    color: #000000;
 }
 .adding-task-est{
     font-family: 'Roboto';
@@ -393,7 +393,38 @@ header{
     font-weight: 500;
 
 }
+.tasks-container{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+    height: auto;
+    display: none;
+}
+.one-task{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem .5rem;
+    border-left: 3px solid black;
+    background-color: #fff;
+    border-radius: 6px;
+}
+.task-name{
+    flex-basis: 80%;
+    font-family: 'Roboto';
+}
+.task-hope{
+    flex-basis: 10%;
+    justify-self: flex-end;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #949494;
+}
+.task-trash{
+    flex-basis: 10%;
+    color: #949494;
 
+}
 @media only screen and (min-width: 768px){
     .timer{
         padding: 1.2rem;

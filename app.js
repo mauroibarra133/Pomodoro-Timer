@@ -204,6 +204,7 @@ function createModalTask(){
     addingTaskButtonSave.classList.add('adding-task-button-save');
     //add atributes
     addingTaskInput.setAttribute('placeHolder','What are you working on?');
+    addingTaskInput.setAttribute('autocapitalize','on');
     addingTaskEstInput.setAttribute('type','number');
     addingTaskEst.innerHTML = 'Est Pomodoros'
     addingTaskEstInput.value = 1;
@@ -243,21 +244,49 @@ function createModalTask(){
         let value = addingTaskEstInput.value
         addingTaskEstInput.value= value == 0 ? 0: parseInt(value)-1;
     });
+        //CANCEL
     addingTaskButtonCancel.addEventListener('click',()=>{
         taskContainer.removeChild(addingTaskContainer)
         taskContainer.appendChild(addButton)
 
     })
+        //SAVE
     addingTaskButtonSave.addEventListener('click',()=>{
         if(addingTaskInput.value == ''){
 
         }else{
-            addTask(addingTaskInput.value,addingTaskEstInput.value )
+            addTask(addingTaskInput.value,addingTaskEstInput.value)
+            addingTaskInput.value = ''
         }
     })
 }
 function addTask(name, pomos){
-    console.log(name,pomos);
+    const containerTasks = document.getElementById('tasks-container')
+    const task = document.createElement('DIV')
+    const taskName = document.createElement('P');
+    const taskHope = document.createElement('P');
+    const trashButton = document.createElement('I');
+
+    task.classList.add('one-task')
+    taskName.classList.add('task-name')
+    taskHope.classList.add('task-hope')
+    trashButton.classList.add('task-trash')
+    trashButton.classList.add('fa-solid')
+    trashButton.classList.add('fa-trash')
+    
+    taskName.innerHTML = name;
+    taskHope.innerHTML = `0/${pomos}`
+
+    task.appendChild(taskName)
+    task.appendChild(taskHope)
+    task.appendChild(trashButton)
+    containerTasks.appendChild(task)
+    containerTasks.style.display='flex'
+
+    trashButton.addEventListener('click',()=>{
+    containerTasks.removeChild(task)
+        
+    })
 }
 
 //runs when started
