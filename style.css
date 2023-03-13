@@ -291,13 +291,13 @@ header{
     width: 100%;
     padding: .8rem;
     border-radius: 6px;
-    border: 3px dashed rgba(255, 255, 255, 0.2);
+    border: 3px dashed rgba(255, 255, 255, 0.6);
 }
 .task-add:hover{
     cursor: pointer;
 }
 .task-add i , .task-add p{
-    color: rgba(255, 255, 255, 0.594);
+    color: rgba(255, 255, 255, 0.84);
 }
 .task-add p{
     font-family: Roboto;
@@ -319,8 +319,12 @@ header{
 .adding-task-input{
     padding: .5rem;
     border-radius: 6px;
-    border-color: var(--bg-color);
+    border: none;
     color: #000000;
+}
+.adding-task-input:focus-visible{
+    outline:none;
+    border-bottom: 1px solid #d4d4d4;
 }
 .adding-task-est{
     font-family: 'Roboto';
@@ -406,16 +410,19 @@ header{
     align-items: center;
     gap: 1rem;
     padding: 1rem .5rem;
-    border-left: 3px solid black;
+    border-left: 3px solid rgb(154, 154, 154);
     background-color: #fff;
-    border-radius: 6px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .task-name{
-    flex-basis: 80%;
+    display: flex;
+    flex-basis: 75%;
+    max-width: 75%;
     font-family: 'Roboto';
 }
 .task-hope{
-    flex-basis: 10%;
+    flex-basis: 15%;
     justify-self: flex-end;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #949494;
@@ -423,8 +430,15 @@ header{
 .task-trash{
     flex-basis: 10%;
     color: #949494;
-
 }
+.task-trash:hover{
+    color: #4b4a4a;
+    cursor: pointer;
+}
+.task-trash:active{
+    color: #000;
+}
+
 @media only screen and (min-width: 768px){
     .timer{
         padding: 1.2rem;

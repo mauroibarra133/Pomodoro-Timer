@@ -204,7 +204,7 @@ function createModalTask(){
     addingTaskButtonSave.classList.add('adding-task-button-save');
     //add atributes
     addingTaskInput.setAttribute('placeHolder','What are you working on?');
-    addingTaskInput.setAttribute('autocapitalize','on');
+    addingTaskInput.setAttribute('maxlength','40');
     addingTaskEstInput.setAttribute('type','number');
     addingTaskEst.innerHTML = 'Est Pomodoros'
     addingTaskEstInput.value = 1;
@@ -275,7 +275,7 @@ function addTask(name, pomos){
     trashButton.classList.add('fa-trash')
     
     taskName.innerHTML = name;
-    taskHope.innerHTML = `0/${pomos}`
+    taskHope.innerHTML = `0 /${pomos}`
 
     task.appendChild(taskName)
     task.appendChild(taskHope)
