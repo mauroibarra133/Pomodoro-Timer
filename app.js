@@ -16,7 +16,8 @@ let idInterval;
 //Counter of the pomo number
 let pomoCount = 0;
 const pomoCounDiv = document.getElementById('info-pomo-count');
-//
+//tasks
+const taskAddButton = document.getElementById('task-add-button')
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -169,6 +170,95 @@ function handleChronometer(){
 function restartPomoCount(){
     confirm('Está seguro que desea reestablecer la cuenta a 0?') == true ? pomoCounDiv.innerHTML = '#0' : null;
 }
+function createModalTask(){
+    //create modal
+    const addingTaskButtonCancel= document.createElement('BUTTON');
+    const addingTaskButtonSave= document.createElement('BUTTON');
+    const taskContainer = document.getElementById('task-container')
+    const addingTaskContainer = document.createElement('DIV');
+    const addingTaskInput = document.createElement('INPUT');
+    const addingTaskEst = document.createElement('H3');
+    const addingTaskEstContainer= document.createElement('DIV');
+    const addingTaskEstInput = document.createElement('INPUT')
+    const addingTaskEstButtons = document.createElement('DIV')
+    const addingTaskEstButtonUp = document.createElement('BUTTON')
+    const addingTaskEstButtonUpI = document.createElement('I')
+    const addingTaskEstButtonDown = document.createElement('BUTTON')
+    const addingTaskEstButtonDownI = document.createElement('I')
+    const addingTaskButtons= document.createElement('DIV');
+    //add clases
+    addingTaskContainer.classList.add('adding-task-container');
+    addingTaskInput.classList.add('adding-task-input');
+    addingTaskEst.classList.add('adding-task-est');
+    addingTaskEstContainer.classList.add('adding-task-est-container');
+    addingTaskEstInput.classList.add('adding-task-est-input');
+    addingTaskEstButtons.classList.add('adding-task-est-buttons');
+    addingTaskEstButtonUp.classList.add('adding-task-est-button-up');
+    addingTaskEstButtonUpI.classList.add('fa-solid');
+    addingTaskEstButtonUpI.classList.add('fa-circle-chevron-up');
+    addingTaskEstButtonDown.classList.add('adding-task-est-button-down');
+    addingTaskEstButtonDownI.classList.add('fa-solid');
+    addingTaskEstButtonDownI.classList.add('fa-circle-chevron-down');
+    addingTaskButtons.classList.add('adding-task-buttons');
+    addingTaskButtonCancel.classList.add('adding-task-button-cancel');
+    addingTaskButtonSave.classList.add('adding-task-button-save');
+    //add atributes
+    addingTaskInput.setAttribute('placeHolder','What are you working on?');
+    addingTaskEstInput.setAttribute('type','number');
+    addingTaskEst.innerHTML = 'Est Pomodoros'
+    addingTaskEstInput.value = 1;
+    addingTaskButtonCancel.innerHTML = 'Cancel'
+    addingTaskButtonSave.innerHTML = 'Save'
+
+    //Remove the "add task button"
+    const addButton = document.getElementById('task-add-button')
+    taskContainer.removeChild(addButton)
+
+    //apend childs
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(addingTaskContainer);
+    addingTaskContainer.appendChild(addingTaskInput);
+    addingTaskContainer.appendChild(addingTaskEst);
+    addingTaskContainer.appendChild(addingTaskEstContainer);
+    addingTaskContainer.appendChild(addingTaskButtons);
+
+    addingTaskEstContainer.appendChild(addingTaskEstInput);
+    addingTaskEstContainer.appendChild(addingTaskEstButtons);
+
+    addingTaskEstButtons.appendChild(addingTaskEstButtonUp)
+    addingTaskEstButtons.appendChild(addingTaskEstButtonDown)
+    addingTaskEstButtonUp.appendChild(addingTaskEstButtonUpI)
+    addingTaskEstButtonDown.appendChild(addingTaskEstButtonDownI)
+    addingTaskButtons.appendChild(addingTaskButtonCancel);
+    addingTaskButtons.appendChild(addingTaskButtonSave);
+    taskContainer.appendChild(fragment);
+
+    
+    //add event listeners
+    addingTaskEstButtonUp.addEventListener('click',()=>{
+        let value = addingTaskEstInput.value
+        addingTaskEstInput.value= parseInt(value)+1;
+    })
+    addingTaskEstButtonDown.addEventListener('click',()=>{
+        let value = addingTaskEstInput.value
+        addingTaskEstInput.value= value == 0 ? 0: parseInt(value)-1;
+    });
+    addingTaskButtonCancel.addEventListener('click',()=>{
+        taskContainer.removeChild(addingTaskContainer)
+        taskContainer.appendChild(addButton)
+
+    })
+    addingTaskButtonSave.addEventListener('click',()=>{
+        if(addingTaskInput.value == ''){
+
+        }else{
+            addTask(addingTaskInput.value,addingTaskEstInput.value )
+        }
+    })
+}
+function addTask(name, pomos){
+    console.log(name,pomos);
+}
 
 //runs when started
 handleMediaQuery(mediaQuery400)
@@ -181,4 +271,4 @@ shortTab.addEventListener('click',changeTab);
 longTab.addEventListener('click',changeTab);
 startButton.addEventListener('click',handleChronometer);
 pomoCounDiv.addEventListener('click',restartPomoCount);
-
+taskAddButton.addEventListener('click',createModalTask);
