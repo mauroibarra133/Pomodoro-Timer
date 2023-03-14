@@ -439,7 +439,115 @@ header{
 .task-trash:active{
     color: #000;
 }
-
+.settings{
+    width: 100%;
+    padding: .5rem;
+    padding-top: 4rem;
+    max-width: 400px;
+    margin: auto;
+}
+.settings-container{
+    background-color: #fff;
+    padding: 1rem;
+    padding-bottom: 0;
+    border-radius: 8px;
+}
+.settings-header{
+    border-bottom: 1px solid #cfc1c1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.settings-header-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .9rem;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+    color: #666666;
+}
+.settings-header i {
+    color: #666666;
+    margin-bottom: .5rem;
+}
+.settings-header i:hover{
+    color: #999999;
+    cursor: pointer;
+}
+.settings-timer{
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+}
+.settings-hero-timer{
+    display: flex;
+    justify-content: flex-start;
+    gap: .4rem;
+    align-items: center;
+}
+.settings-hero-timer i,.settings-hero-timer h4{
+    color: #999999;
+    text-transform: uppercase;
+    font-size: .9rem;
+}
+.settings-timer-title, .settings-timer-long-interval h4{
+    font-size: .9rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    color: #444444;
+}
+.settings-timer-inputs{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.settings-timer-input{
+    flex-basis: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.settings-timer-input input,.settings-timer-long-interval input{
+    width: 70px;
+    border: 0;
+    padding: .5rem;
+    background-color: #9999992b;
+    border-radius: 4px;
+}
+.settings-timer-input h4{
+    color: #999999d7;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+.settings-timer-long-interval{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.settings-timer-long-interval input{
+    width: 70px;
+}
+.settings-bottom{
+    padding: 2rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.settings-ok{
+    background-color: rgba(0, 0, 0, 0.852);
+    padding: .5rem 1rem;
+    color: white;
+    border-radius: 6px;
+    border: 0;
+}
+.settings-ok:hover{
+    cursor: pointer;
+}
 @media only screen and (min-width: 768px){
     .timer{
         padding: 1.2rem;

@@ -11,6 +11,44 @@
     <title>Pomodoro Timer</title>
 </head>
 <body id="body">
+    <section class="options">
+        <div class="settings">
+            <div class="settings-container">
+                <div class="settings-header">
+                    <h3 class="settings-header-title">Settings</h3>
+                    <i class="fa-solid fa-xmark settings-header-cruz"></i>
+                </div>
+                <div class="settings-timer">
+                    <div class="settings-hero-timer">
+                        <i class="fa-regular fa-clock"></i>
+                        <h4 class="settings-timer-title">Timer</h4>
+                    </div>
+                    <h4 class="settings-timer-title">Time (minutes)</h4>
+                    <div class="settings-timer-inputs">
+                        <div class="settings-timer-input">
+                            <h4>Pomodoro</h4>
+                            <input type="number" value="25">
+                        </div>
+                        <div class="settings-timer-input">
+                            <h4>Short break</h4>
+                            <input type="number" value="5">
+                        </div>
+                        <div class="settings-timer-input">
+                            <h4>Long break</h4>
+                            <input type="number" value="15">
+                        </div>
+                    </div>
+                    <div class="settings-timer-long-interval">
+                        <h4>Long break interval</h4>
+                        <input type="number" value="4">
+                    </div>
+
+                </div>
+                <div class="settings-bottom"><button class="settings-ok">OK</button></div>
+                
+            </div>
+        </div>
+    </section>
     <header>
         <div class="header-logo">
             <a href="#" class="header-logo-link">
@@ -26,7 +64,7 @@
                     <h2 id="header-title-report" class="header-title-report"></h2>
                 </a>
             </div>
-            <div class="header-settings header-item">
+            <div class="header-settings header-item" id="settings-button">
                 <a href="#">
                     <i class="fa-solid fa-gear"></i>
                     <h2 id="header-title-settings" class="header-title-settings"></h2>

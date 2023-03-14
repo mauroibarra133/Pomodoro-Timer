@@ -21,6 +21,8 @@ let taskHopeCount = 0;
 //Buttons
 const taskAddButton = document.getElementById('task-add-button')
 const nextButton = document.getElementById('timer-next-button');
+//config
+const settingButton = document.getElementById('settings-button');
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -336,16 +338,23 @@ function addTask(name, pomos){
         
     })
 }
+function showSettings(){
 
+}
 //runs when started
 handleMediaQuery(mediaQuery400)
 handleMediaQuery(mediaQuery600)
 //Event Listeners
 mediaQuery400.addEventListener('change',()=>{handleMediaQuery(mediaQuery400)});
 mediaQuery600.addEventListener('change',()=>{handleMediaQuery(mediaQuery600)});
+    //tabs
 pomoTab.addEventListener('click',changeTab);
 shortTab.addEventListener('click',changeTab);
 longTab.addEventListener('click',changeTab);
+    //buttons
 startButton.addEventListener('click',handleChronometer);
-pomoCounDiv.addEventListener('click',restartPomoCount);
 taskAddButton.addEventListener('click',createModalTask);
+    //counter
+pomoCounDiv.addEventListener('click',restartPomoCount);
+    //config
+settingButton.addEventListener('click',showSettings)
