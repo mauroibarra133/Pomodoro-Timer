@@ -31,6 +31,9 @@ let longValue = 15;
 let intervalValue = 3;
 //report
 const reportButton= document.getElementById('report-button');
+//Save the time studied
+const myStorage = localStorage;
+myStorage.setItem('timeStudied',0)
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -139,8 +142,12 @@ function nextTab(){
                     if(taskHope!= null){
                         taskHopeCount++;
                         taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent[3]}`
-
                     }
+                    let timeStudied = Number.parseInt(myStorage.getItem('timeStudied'))
+                    let minutesInTimer = Number.parseInt(timerNumber.textContent.slice(0,2))
+                    let secondsInTimer = Number.parseInt(timerNumber.textContent.slice(3,5))
+                    timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
+                    myStorage.setItem('timeStudied', timeStudied)
                     // If i did 3 pomodoros, it`s turn to go to the long tab
                     if (pomoCount % intervalValue == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
