@@ -29,6 +29,8 @@ let pomoValue = 25;
 let shortValue = 5;
 let longValue = 15;
 let intervalValue = 3;
+//report
+const reportButton= document.getElementById('report-button');
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -348,20 +350,25 @@ function showSettings(){
     const settingsCruz = document.querySelector('.settings-header-cruz');
     const settings = document.querySelector('.settings');
     const options = document.querySelector('.options');
+    const report = document.querySelector('.report');
 
     if(settingButton.classList.contains('setting-active')){
         options.style.height = '100vh';
-        settings.style.transform = "translateY(0)"
+        body.style.overflow = 'hidden';
+        settings.style.transform = "translateY(35%)"
     }
     settingsCruz.addEventListener('click',()=>{
         settingButton.classList.toggle('setting-active');
         options.style.height = '0vh';
+        body.style.overflow = 'scroll';
         settings.style.transform = "translateY(-200%)"
+
     });
     options.addEventListener('click',(e)=>{
         if(e.target.classList.contains('options')){
             settingButton.classList.toggle('setting-active');
             options.style.height = '0vh';
+            body.style.overflow = 'scroll';
             settings.style.transform = "translateY(-200%)"
         }
 
@@ -393,6 +400,40 @@ function showSettings(){
     });
 
 }
+function showreports(){
+    reportButton.classList.toggle('report-active');
+    const reportCruz = document.querySelector('.report-header-cruz');
+    const report = document.querySelector('.report');
+    const options = document.querySelector('.options');
+    const reportClose = document.querySelector('.report-button')
+
+    if(reportButton.classList.contains('report-active')){
+        options.style.height = '100vh';
+        report.style.transform = "translateY(15%)";
+        body.style.overflow = 'hidden';
+    }
+    reportCruz.addEventListener('click',()=>{
+        reportButton.classList.toggle('report-active');
+        options.style.height = '0vh';
+        report.style.transform = "translateY(-200%)"
+        body.style.overflow = 'scroll';
+
+    });
+    options.addEventListener('click',(e)=>{
+        if(e.target.classList.contains('options')){
+            reportButton.classList.toggle('setting-active');
+            options.style.height = '0vh';
+            report.style.transform = "translateY(-200%)";
+            body.style.overflow = 'scroll';
+        }
+    });
+    reportClose.addEventListener('click',()=>{
+        reportButton.classList.toggle('setting-active');
+        options.style.height = '0vh';
+        report.style.transform = "translateY(-200%)";
+        body.style.overflow = 'scroll';
+    })
+}
 //runs when started
 handleMediaQuery(mediaQuery400)
 handleMediaQuery(mediaQuery600)
@@ -410,3 +451,10 @@ taskAddButton.addEventListener('click',createModalTask);
 pomoCounDiv.addEventListener('click',restartPomoCount);
     //config
 settingButton.addEventListener('click',showSettings)
+reportButton.addEventListener('click',showreports)
+
+const elementsWithTabIndex = document.querySelectorAll('[tabindex]');
+
+elementsWithTabIndex.forEach(function(element) {
+    element.removeAttribute('tabindex');
+});
