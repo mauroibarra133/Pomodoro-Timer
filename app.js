@@ -1,7 +1,5 @@
 "use strict";
 
-
-//Conocimientos: API  de matchmedia,event manipulation,variables en css,DOM manipulation,
 // mediaQueries
 let mediaQuery400 = window.matchMedia("(min-width: 400px)");
 let mediaQuery600 = window.matchMedia("(min-width: 600px)");
@@ -11,17 +9,19 @@ const shortTab = document.getElementById('timer-short');
 const longTab = document.getElementById('timer-long');
 //Timer
 const startButton = document.getElementById('timer-button')
-//Interval of the timer
+//Interval timer's ID
 let idInterval;
 //Counter of the pomo number
 let pomoCount = 0;
 const pomoCounDiv = document.getElementById('info-pomo-count');
-//tasks
-const taskAddButton = document.getElementById('task-add-button')
+//Tasks
 const tasksContainer = document.getElementById('tasks-container')
-const nextButton = document.getElementById('timer-next-button');
 let taskHope = document.querySelector('.task-hope')
 let taskHopeCount = 0;
+//Buttons
+const taskAddButton = document.getElementById('task-add-button')
+const nextButton = document.getElementById('timer-next-button');
+
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -30,6 +30,7 @@ function handleMediaQuery(mediaQuery){
     const headerReport = document.getElementById('header-title-report');
     const headerSettings = document.getElementById('header-title-settings');
     const headerLogin = document.getElementById('header-title-login');
+
 
     if(mediaQuery.media.includes('400')){
         if(mediaQuery.matches){
@@ -60,13 +61,14 @@ function handleMediaQuery(mediaQuery){
 function changeTab(e){
     let target = e.target;
 
+    //return the div
     while(target.tagName == 'FONT'){
         target = target.parentNode;
     }
     if(target.tagName == 'H2'){
         target = target.parentNode;
     }
-
+    //Change the active tab
     for(let tab of [pomoTab,shortTab,longTab]){
         tab = tab.parentNode
         if(tab.matches('.timer-pomo-active')){
@@ -79,11 +81,11 @@ function changeTab(e){
 }
 
 function applyTabEffects(target){
-    const backgroundPage = document.getElementById('body');
     const timerNumber = document.getElementById('timer-number')
     const timerAdvice = document.getElementById('timer-advice')
     const root = document.documentElement.style;
 
+    //Short tab
     if(target.childNodes[0].matches('#timer-short')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
@@ -93,17 +95,17 @@ function applyTabEffects(target){
         root.setProperty('----button-bg-hover','#31834f')
         root.setProperty('--border-bottom-header','#c9ecd6')
 
-
+    //Pomo tab
     }else if(target.childNodes[0].matches('#timer-pomo')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#ba4949')
-
         timerNumber.innerHTML = '25:00'
         timerAdvice.innerHTML = 'Time to focus!'
         root.setProperty('----button-bg-hover','#ba4949')
         root.setProperty('--border-bottom-header','#ecc9c9')
-
+    
+    //Long tab
     }else if(target.childNodes[0].matches('#timer-long')){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
@@ -112,31 +114,32 @@ function applyTabEffects(target){
         timerAdvice.innerHTML = 'Time to take a rest!'
         root.setProperty('----button-bg-hover','#84b6f4')
         root.setProperty('--border-bottom-header','#c9daec')
-
-
     }
 }
+
 function nextTab(){
+
     for(let tab of [pomoTab,shortTab,longTab]){
+            //Change the active tab
             if(tab.parentNode.matches('.timer-pomo-active')){
                 tab.parentNode.classList.toggle('timer-pomo-active');
+
+                //if pomo's tab is active, and exist a added task, increment the hopeCount
                 if((tab.id == 'timer-pomo')){
                     taskHope = document.querySelector('.task-hope')
                     if(taskHope!= null){
                         taskHopeCount++;
                         taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent[3]}`
 
-                    }else{
-                        taskHopeCount= 0;
-
                     }
-                    
+                    // If i did 3 pomodoros, it`s turn to go to the long tab
                     if (pomoCount % 3 == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
                         longTab.parentNode.classList.toggle('timer-pomo-active');
                         pomoCount += 1
                         pomoCounDiv.innerHTML = `#${pomoCount}`
                         break;
+                    // If i did less than 3 pomodoros, it`s turn to go to the short tab
                     }else{
                         applyTabEffects(tab = shortTab.parentNode)
                         shortTab.parentNode.classList.toggle('timer-pomo-active');
@@ -144,11 +147,12 @@ function nextTab(){
                         pomoCounDiv.innerHTML = `#${pomoCount}`
                         break;
                     }
-                    
+                // if short tab is active, go to pomo tab 
                 }else if((tab.id == 'timer-short')){
                     applyTabEffects(tab = pomoTab.parentNode)
                     pomoTab.parentNode.classList.toggle('timer-pomo-active');
                     break;
+                // if long tab is active, go to pomo tab 
                 }else if((tab.id == 'timer-long')){
                     applyTabEffects(tab = pomoTab.parentNode)
                     pomoTab.parentNode.classList.toggle('timer-pomo-active');
@@ -157,27 +161,34 @@ function nextTab(){
     
         }
     }
-    
-    startButton.childNodes[1].classList.toggle('start');
+    // When we change the tab, the button has to be in "start" status
+    startButton.childNodes[1].classList.toggle('start'); 
     nextButton.style.opacity= '0'
 
 
 }
 function handleChronometer(){
     const timer = document.getElementById('timer-number');
+
+    //get the amount of seconds
     let initialSeconds = Number.parseInt((timer.textContent.slice(0,2) * 60)) + Number.parseInt(timer.textContent.slice(3,5));
+
+    //Run the clock when the button is in "start" mode
     if (startButton.childNodes[1].classList.contains('start')){
         idInterval = setInterval(()=>{
             initialSeconds -=  1
             let minutes = Math.floor(initialSeconds / 60)
             let seconds = initialSeconds % 60
+            //This makes that the client can´t click anumber under 0
             timer.innerHTML = `${minutes.toString().split('').length == 1 ? '0'+minutes : minutes}:${seconds.toString().split('').length == 1 ? '0'+seconds : seconds}`
             
+            // if the clock get to 00:00, change the tab
             if(timer.textContent == '00:00'){
                 nextTab();
             }
         },1000);
         
+        //Change from "start" mode to "pause" mode
         startButton.childNodes[1].innerHTML = 'PAUSE'
         startButton.childNodes[1].classList.toggle('start');
         nextButton.style.opacity= '1'
@@ -209,7 +220,7 @@ function createModalTask(){
     const addingTaskEstButtonDown = document.createElement('BUTTON')
     const addingTaskEstButtonDownI = document.createElement('I')
     const addingTaskButtons= document.createElement('DIV');
-    //add clases
+    //add classes
     addingTaskContainer.classList.add('adding-task-container');
     addingTaskInput.classList.add('adding-task-input');
     addingTaskEst.classList.add('adding-task-est');
@@ -238,7 +249,7 @@ function createModalTask(){
     const addButton = document.getElementById('task-add-button')
     taskContainer.removeChild(addButton)
 
-    //apend childs
+    //append childs
     const fragment = document.createDocumentFragment();
     fragment.appendChild(addingTaskContainer);
     addingTaskContainer.appendChild(addingTaskInput);
@@ -272,18 +283,18 @@ function createModalTask(){
         taskContainer.removeChild(addingTaskContainer)
         taskContainer.appendChild(addButton)
 
-    })
+    });
         //SAVE
     addingTaskInput.addEventListener('keypress',(e)=>{
         if(addingTaskInput.value == ''){
-
         }else{
+            //add a task with the Enter key
             if(e.key == 'Enter'){
                 addTask(addingTaskInput.value,addingTaskEstInput.value)
                 addingTaskInput.value = ''
             }
         }
-    })
+    });
     addingTaskButtonSave.addEventListener('click',()=>{
         if(addingTaskInput.value == ''){
 
@@ -291,9 +302,10 @@ function createModalTask(){
             addTask(addingTaskInput.value,addingTaskEstInput.value)
             addingTaskInput.value = ''
         }
-    })
+    });
 }
 function addTask(name, pomos){
+    //create the task
     const task = document.createElement('DIV')
     const taskName = document.createElement('P');
     const taskHope = document.createElement('P');
@@ -312,9 +324,12 @@ function addTask(name, pomos){
     task.appendChild(taskName)
     task.appendChild(taskHope)
     task.appendChild(trashButton)
+
+    //show the task
     tasksContainer.appendChild(task)
     tasksContainer.style.display='flex'
 
+    //activate the trash button
     trashButton.addEventListener('click',()=>{
         tasksContainer.removeChild(task)
         taskHopeCount= 0;
