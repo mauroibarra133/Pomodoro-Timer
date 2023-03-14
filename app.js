@@ -144,10 +144,9 @@ function nextTab(){
 function handleChronometer(){
     const timer = document.getElementById('timer-number');
     const nextButton = document.getElementById('timer-next-button');
-    let initialSeconds = Number.parseInt(timer.textContent.slice(0,2)) * 60;
-
+    let initialSeconds = Number.parseInt((timer.textContent.slice(0,2) * 60)) + Number.parseInt(timer.textContent.slice(3,5));
     if (startButton.childNodes[1].innerHTML == 'START'){
-        idInterval =setInterval(()=>{
+        idInterval = setInterval(()=>{
             initialSeconds -=  1
             let minutes = Math.floor(initialSeconds / 60)
             let seconds = initialSeconds % 60
