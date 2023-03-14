@@ -99,6 +99,7 @@ function applyTabEffects(target){
 
     //Short tab
     if(target.childNodes[0].matches('#timer-short')){
+        saveTimeStudied()
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#31834f')
@@ -107,18 +108,20 @@ function applyTabEffects(target){
         root.setProperty('----button-bg-hover','#31834f')
         root.setProperty('--border-bottom-header','#c9ecd6')
 
+
     //Pomo tab
     }else if(target.childNodes[0].matches('#timer-pomo')){
-        clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#ba4949')
         timerNumber.innerHTML = pomoValue.toString().length == 1 ? `0${pomoValue}:00` : `${pomoValue}:00`
         timerAdvice.innerHTML = 'Time to focus!'
         root.setProperty('----button-bg-hover','#ba4949')
         root.setProperty('--border-bottom-header','#ecc9c9')
+        clearInterval(idInterval)
     
     //Long tab
     }else if(target.childNodes[0].matches('#timer-long')){
+        saveTimeStudied()
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#84b6f4')
@@ -126,9 +129,16 @@ function applyTabEffects(target){
         timerAdvice.innerHTML = 'Time to take a rest!'
         root.setProperty('----button-bg-hover','#84b6f4')
         root.setProperty('--border-bottom-header','#c9daec')
+
     }
 }
-
+function saveTimeStudied(){
+    let timeStudied = Number.parseInt(myStorage.getItem('timeStudied'))
+    let minutesInTimer = Number.parseInt(timerNumber.textContent.slice(0,2))
+    let secondsInTimer = Number.parseInt(timerNumber.textContent.slice(3,5))
+    timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
+    myStorage.setItem('timeStudied', timeStudied)
+}
 function nextTab(){
 
     for(let tab of [pomoTab,shortTab,longTab]){
@@ -143,11 +153,6 @@ function nextTab(){
                         taskHopeCount++;
                         taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent[3]}`
                     }
-                    let timeStudied = Number.parseInt(myStorage.getItem('timeStudied'))
-                    let minutesInTimer = Number.parseInt(timerNumber.textContent.slice(0,2))
-                    let secondsInTimer = Number.parseInt(timerNumber.textContent.slice(3,5))
-                    timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
-                    myStorage.setItem('timeStudied', timeStudied)
                     // If i did 3 pomodoros, it`s turn to go to the long tab
                     if (pomoCount % intervalValue == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
