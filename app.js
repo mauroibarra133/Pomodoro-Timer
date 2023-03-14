@@ -20,7 +20,7 @@ const pomoCounDiv = document.getElementById('info-pomo-count');
 const taskAddButton = document.getElementById('task-add-button')
 const tasksContainer = document.getElementById('tasks-container')
 const nextButton = document.getElementById('timer-next-button');
-const taskHope = document.querySelector('.task-hope')
+let taskHope = document.querySelector('.task-hope')
 let taskHopeCount = 0;
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -121,6 +121,16 @@ function nextTab(){
             if(tab.parentNode.matches('.timer-pomo-active')){
                 tab.parentNode.classList.toggle('timer-pomo-active');
                 if((tab.id == 'timer-pomo')){
+                    taskHope = document.querySelector('.task-hope')
+                    if(taskHope!= null){
+                        taskHopeCount++;
+                        taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent[3]}`
+
+                    }else{
+                        taskHopeCount= 0;
+
+                    }
+                    
                     if (pomoCount % 3 == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
                         longTab.parentNode.classList.toggle('timer-pomo-active');
@@ -297,7 +307,7 @@ function addTask(name, pomos){
     trashButton.classList.add('fa-trash')
     
     taskName.innerHTML = name;
-    taskHope.innerHTML = `0 /${pomos}`
+    taskHope.innerHTML = `0 /${pomos}`  
 
     task.appendChild(taskName)
     task.appendChild(taskHope)
@@ -307,6 +317,7 @@ function addTask(name, pomos){
 
     trashButton.addEventListener('click',()=>{
         tasksContainer.removeChild(task)
+        taskHopeCount= 0;
         
     })
 }
