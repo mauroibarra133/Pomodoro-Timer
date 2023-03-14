@@ -439,10 +439,16 @@ header{
 .task-trash:active{
     color: #000;
 }
+.options{
+    height: 0vh;
+    display: flex;
+    align-items: center;
+}
 .settings{
+    transform: translateY(-200%);
+    transition: transform .5s ease;
     width: 100%;
     padding: .5rem;
-    padding-top: 4rem;
     max-width: 400px;
     margin: auto;
 }

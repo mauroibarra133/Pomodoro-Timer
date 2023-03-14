@@ -9,6 +9,7 @@ const shortTab = document.getElementById('timer-short');
 const longTab = document.getElementById('timer-long');
 //Timer
 const startButton = document.getElementById('timer-button')
+const timerNumber = document.getElementById('timer-number')
 //Interval timer's ID
 let idInterval;
 //Counter of the pomo number
@@ -23,6 +24,11 @@ const taskAddButton = document.getElementById('task-add-button')
 const nextButton = document.getElementById('timer-next-button');
 //config
 const settingButton = document.getElementById('settings-button');
+const OKsettingButton = document.getElementById('ok-settings');
+let pomoValue = 25;
+let shortValue = 5;
+let longValue = 15;
+let intervalValue = 3;
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -83,7 +89,6 @@ function changeTab(e){
 }
 
 function applyTabEffects(target){
-    const timerNumber = document.getElementById('timer-number')
     const timerAdvice = document.getElementById('timer-advice')
     const root = document.documentElement.style;
 
@@ -92,7 +97,7 @@ function applyTabEffects(target){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#31834f')
-        timerNumber.innerHTML = '05:00'
+        timerNumber.innerHTML = shortValue.toString().length == 1 ? `0${shortValue}:00` : `${shortValue}:00`
         timerAdvice.innerHTML = 'Time to take a break!'
         root.setProperty('----button-bg-hover','#31834f')
         root.setProperty('--border-bottom-header','#c9ecd6')
@@ -102,7 +107,7 @@ function applyTabEffects(target){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#ba4949')
-        timerNumber.innerHTML = '25:00'
+        timerNumber.innerHTML = pomoValue.toString().length == 1 ? `0${pomoValue}:00` : `${pomoValue}:00`
         timerAdvice.innerHTML = 'Time to focus!'
         root.setProperty('----button-bg-hover','#ba4949')
         root.setProperty('--border-bottom-header','#ecc9c9')
@@ -112,7 +117,7 @@ function applyTabEffects(target){
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#84b6f4')
-        timerNumber.innerHTML = '15:00'
+        timerNumber.innerHTML = longValue.toString().length == 1 ? `0${longValue}:00` : `${longValue}:00`
         timerAdvice.innerHTML = 'Time to take a rest!'
         root.setProperty('----button-bg-hover','#84b6f4')
         root.setProperty('--border-bottom-header','#c9daec')
@@ -135,7 +140,7 @@ function nextTab(){
 
                     }
                     // If i did 3 pomodoros, it`s turn to go to the long tab
-                    if (pomoCount % 3 == 0 && pomoCount!= 0){
+                    if (pomoCount % intervalValue == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
                         longTab.parentNode.classList.toggle('timer-pomo-active');
                         pomoCount += 1
@@ -339,6 +344,53 @@ function addTask(name, pomos){
     })
 }
 function showSettings(){
+    settingButton.classList.toggle('setting-active');
+    const settingsCruz = document.querySelector('.settings-header-cruz');
+    const settings = document.querySelector('.settings');
+    const options = document.querySelector('.options');
+
+    if(settingButton.classList.contains('setting-active')){
+        options.style.height = '100vh';
+        settings.style.transform = "translateY(0)"
+    }
+    settingsCruz.addEventListener('click',()=>{
+        settingButton.classList.toggle('setting-active');
+        options.style.height = '0vh';
+        settings.style.transform = "translateY(-200%)"
+    });
+    options.addEventListener('click',(e)=>{
+        if(e.target.classList.contains('options')){
+            settingButton.classList.toggle('setting-active');
+            options.style.height = '0vh';
+            settings.style.transform = "translateY(-200%)"
+        }
+
+    });
+    OKsettingButton.addEventListener('click',()=>{
+
+        pomoValue = document.getElementById('pomo-value').value
+        shortValue = document.getElementById('short-value').value
+        longValue = document.getElementById('long-value').value
+        intervalValue = document.getElementById('interval-value').value
+
+        settingButton.classList.toggle('setting-active');
+        options.style.height = '0vh';
+        settings.style.transform = "translateY(-200%)"
+
+        for(let tab of [pomoTab,shortTab,longTab]){
+            //Change the number
+            if(tab.parentNode.matches('.timer-pomo-active')){
+                if((tab.id == 'timer-pomo')){
+                    timerNumber.innerHTML = pomoValue.toString().length == 1 ? `0${pomoValue}:00` : `${pomoValue}:00`
+                }else if(tab.id == 'timer-short'){
+                    timerNumber.innerHTML = shortValue.toString().length == 1 ? `0${shortValue}:00` : `${shortValue}:00`
+                }else if(tab.id == 'timer-long'){
+                    timerNumber.innerHTML = longValue.toString().length == 1 ? `0${longValue}:00` : `${longValue}:00`
+                }
+            }
+        }
+
+    });
 
 }
 //runs when started
