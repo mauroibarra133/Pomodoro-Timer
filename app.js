@@ -18,6 +18,8 @@ let pomoCount = 0;
 const pomoCounDiv = document.getElementById('info-pomo-count');
 //tasks
 const taskAddButton = document.getElementById('task-add-button')
+
+
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -55,9 +57,15 @@ function handleMediaQuery(mediaQuery){
 
 function changeTab(e){
     let target = e.target;
-    if(e.target.tagName == 'H2'){
-        target = e.target.parentNode;
+    console.log(target);
+
+    while(target.tagName == 'FONT'){
+        target = target.parentNode;
     }
+    if(target.tagName == 'H2'){
+        target = target.parentNode;
+    }
+    
     for(let tab of [pomoTab,shortTab,longTab]){
         tab = tab.parentNode
         if(tab.matches('.timer-pomo-active')){
@@ -145,7 +153,7 @@ function handleChronometer(){
     const timer = document.getElementById('timer-number');
     const nextButton = document.getElementById('timer-next-button');
     let initialSeconds = Number.parseInt((timer.textContent.slice(0,2) * 60)) + Number.parseInt(timer.textContent.slice(3,5));
-    if (startButton.childNodes[1].innerHTML == 'START'){
+    if (startButton.childNodes[1].classList.contains('start')){
         idInterval = setInterval(()=>{
             initialSeconds -=  1
             let minutes = Math.floor(initialSeconds / 60)
@@ -155,14 +163,16 @@ function handleChronometer(){
             if(timer.textContent == '00:00'){
                 nextTab();
             }
-        },1000)
+        },1000);
         
         startButton.childNodes[1].innerHTML = 'PAUSE'
+        startButton.childNodes[1].classList.toggle('start');
         nextButton.style.opacity= '1'
         nextButton.addEventListener('click',nextTab)
     }else{
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
+        startButton.childNodes[1].classList.toggle('start');
         nextButton.style.opacity= '0'
     }
 }
