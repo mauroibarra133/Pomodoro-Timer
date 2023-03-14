@@ -18,6 +18,8 @@ let pomoCount = 0;
 const pomoCounDiv = document.getElementById('info-pomo-count');
 //tasks
 const taskAddButton = document.getElementById('task-add-button')
+const tasksContainer = document.getElementById('tasks-container')
+const nextButton = document.getElementById('timer-next-button');
 
 
 function handleMediaQuery(mediaQuery){
@@ -57,7 +59,6 @@ function handleMediaQuery(mediaQuery){
 
 function changeTab(e){
     let target = e.target;
-    console.log(target);
 
     while(target.tagName == 'FONT'){
         target = target.parentNode;
@@ -65,7 +66,7 @@ function changeTab(e){
     if(target.tagName == 'H2'){
         target = target.parentNode;
     }
-    
+
     for(let tab of [pomoTab,shortTab,longTab]){
         tab = tab.parentNode
         if(tab.matches('.timer-pomo-active')){
@@ -116,11 +117,9 @@ function applyTabEffects(target){
     }
 }
 function nextTab(){
-    
     for(let tab of [pomoTab,shortTab,longTab]){
             if(tab.parentNode.matches('.timer-pomo-active')){
                 tab.parentNode.classList.toggle('timer-pomo-active');
-
                 if((tab.id == 'timer-pomo')){
                     if (pomoCount % 3 == 0 && pomoCount!= 0){
                         applyTabEffects(tab = longTab.parentNode)
@@ -133,7 +132,6 @@ function nextTab(){
                         shortTab.parentNode.classList.toggle('timer-pomo-active');
                         pomoCount += 1
                         pomoCounDiv.innerHTML = `#${pomoCount}`
-
                         break;
                     }
                     
@@ -148,10 +146,13 @@ function nextTab(){
                 }
         }
     }
+    
+    startButton.childNodes[1].classList.toggle('start');
+    nextButton.style.opacity= '0'
+
 }
 function handleChronometer(){
     const timer = document.getElementById('timer-number');
-    const nextButton = document.getElementById('timer-next-button');
     let initialSeconds = Number.parseInt((timer.textContent.slice(0,2) * 60)) + Number.parseInt(timer.textContent.slice(3,5));
     if (startButton.childNodes[1].classList.contains('start')){
         idInterval = setInterval(()=>{
@@ -280,7 +281,6 @@ function createModalTask(){
     })
 }
 function addTask(name, pomos){
-    const containerTasks = document.getElementById('tasks-container')
     const task = document.createElement('DIV')
     const taskName = document.createElement('P');
     const taskHope = document.createElement('P');
@@ -299,11 +299,11 @@ function addTask(name, pomos){
     task.appendChild(taskName)
     task.appendChild(taskHope)
     task.appendChild(trashButton)
-    containerTasks.appendChild(task)
-    containerTasks.style.display='flex'
+    tasksContainer.appendChild(task)
+    tasksContainer.style.display='flex'
 
     trashButton.addEventListener('click',()=>{
-    containerTasks.removeChild(task)
+        tasksContainer.removeChild(task)
         
     })
 }
