@@ -20,8 +20,8 @@ const pomoCounDiv = document.getElementById('info-pomo-count');
 const taskAddButton = document.getElementById('task-add-button')
 const tasksContainer = document.getElementById('tasks-container')
 const nextButton = document.getElementById('timer-next-button');
-
-
+const taskHope = document.querySelector('.task-hope')
+let taskHopeCount = 0;
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -144,11 +144,13 @@ function nextTab(){
                     pomoTab.parentNode.classList.toggle('timer-pomo-active');
                     break;
                 }
+    
         }
     }
     
     startButton.childNodes[1].classList.toggle('start');
     nextButton.style.opacity= '0'
+
 
 }
 function handleChronometer(){
@@ -179,6 +181,7 @@ function handleChronometer(){
 }
 function restartPomoCount(){
     confirm('Está seguro que desea reestablecer la cuenta a 0?') == true ? pomoCounDiv.innerHTML = '#0' : null;
+    pomoCount = 0
 }
 function createModalTask(){
     //create modal
