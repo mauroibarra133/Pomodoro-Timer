@@ -155,7 +155,7 @@ function nextTab(){
                     taskHope = document.querySelector('.task-hope')
                     if(taskHope!= null){
                         taskHopeCount++;
-                        taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent[3]}`
+                        taskHope.innerHTML = `${taskHopeCount} /${taskHope.textContent.split('/')[1]}`
                     }
                     // If i did 3 pomodoros, it`s turn to go to the long tab
                     if (pomoCount % intervalValue == 0 && pomoCount!= 0){
@@ -326,6 +326,7 @@ function createModalTask(){
         }else{
             addTask(addingTaskInput.value,addingTaskEstInput.value)
             addingTaskInput.value = ''
+            addingTaskEstInput.value = 1;
         }
     });
 }
