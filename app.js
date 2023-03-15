@@ -33,7 +33,8 @@ let intervalValue = 3;
 const reportButton= document.getElementById('report-button');
 //Save the time studied
 const myStorage = localStorage;
-myStorage.setItem('timeStudied',0)
+const hoursFocused = document.querySelector('.hours-focused');
+const restartReportButton = document.getElementById('restart-report');
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -138,6 +139,7 @@ function saveTimeStudied(){
     let secondsInTimer = Number.parseInt(timerNumber.textContent.slice(3,5))
     timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
     myStorage.setItem('timeStudied', timeStudied)
+    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
 }
 function nextTab(){
 
@@ -372,7 +374,7 @@ function showSettings(){
     settingsCruz.addEventListener('click',()=>{
         settingButton.classList.toggle('setting-active');
         options.style.height = '0vh';
-        body.style.overflow = 'scroll';
+        body.style.overflow = 'scroll'; 
         settings.style.transform = "translateY(-200%)"
 
     });
@@ -408,7 +410,7 @@ function showSettings(){
                 }
             }
         }
-
+    body.style.overflow = 'scroll'; 
     });
 
 }
@@ -418,6 +420,8 @@ function showreports(){
     const report = document.querySelector('.report');
     const options = document.querySelector('.options');
     const reportClose = document.querySelector('.report-button')
+
+    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
 
     if(reportButton.classList.contains('report-active')){
         options.style.height = '100vh';
@@ -464,9 +468,7 @@ pomoCounDiv.addEventListener('click',restartPomoCount);
     //config
 settingButton.addEventListener('click',showSettings)
 reportButton.addEventListener('click',showreports)
-
-const elementsWithTabIndex = document.querySelectorAll('[tabindex]');
-
-elementsWithTabIndex.forEach(function(element) {
-    element.removeAttribute('tabindex');
-});
+    //report
+hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h`
+    
+restartReportButton.addEventListener('click',()=>{myStorage.setItem('timeStudied', 0), hoursFocused.innerHTML = 0})
