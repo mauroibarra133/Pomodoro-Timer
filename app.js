@@ -34,7 +34,9 @@ const reportButton= document.getElementById('report-button');
 //Save the time studied
 const myStorage = localStorage;
 const hoursFocused = document.querySelector('.hours-focused');
+const daysAccessed = document.getElementById('days-accesed');
 const restartReportButton = document.getElementById('restart-report');
+let dayCount =  0;
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -422,6 +424,7 @@ function showreports(){
     const reportClose = document.querySelector('.report-button')
 
     hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
+    daysAccessed.innerHTML = dayCount;
 
     if(reportButton.classList.contains('report-active')){
         options.style.height = '100vh';
@@ -450,14 +453,44 @@ function showreports(){
         body.style.overflow = 'scroll';
     })
 }
+function countDays(){
+    let date = new Date;
 
+    if(myStorage.getItem('date') == null){
+        dayCount++;
+        let objectDate = {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            daysIn: dayCount
+        }
+        myStorage.setItem('date',JSON.stringify(objectDate))
+    }else{
+        let todayDate = {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            daysIn: dayCount
+        }
+        let datefromStorage = JSON.parse(myStorage.getItem('date'));
+        if(todayDate.day == datefromStorage.day && todayDate.month == datefromStorage.month && todayDate.year == datefromStorage.year){
+        }else{
+            dayCount++
+            myStorage.setItem('date',JSON.stringify(todayDate));
+        }
+    }
+
+}
 //runs when started
 window.addEventListener('DOMContentLoaded ',()=>{
     hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h`
+    daysAccessed.innerHTML = dayCount;
+
 });
 window.addEventListener('load',()=>{
     handleMediaQuery(mediaQuery400)
     handleMediaQuery(mediaQuery600)
+    countDays()
 })
 
 //Event Listeners
@@ -476,4 +509,10 @@ pomoCounDiv.addEventListener('click',restartPomoCount);
 settingButton.addEventListener('click',showSettings)
 reportButton.addEventListener('click',showreports)
     //report
-restartReportButton.addEventListener('click',()=>{myStorage.setItem('timeStudied', 0), hoursFocused.innerHTML = 0})
+restartReportButton.addEventListener('click',()=>{
+    myStorage.setItem('timeStudied', 0);
+    myStorage.removeItem('date');
+    hoursFocused.innerHTML = 0;
+    daysAccessed.innerHTML = 0;
+
+})
