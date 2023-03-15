@@ -450,9 +450,16 @@ function showreports(){
         body.style.overflow = 'scroll';
     })
 }
+
 //runs when started
-handleMediaQuery(mediaQuery400)
-handleMediaQuery(mediaQuery600)
+window.addEventListener('DOMContentLoaded ',()=>{
+    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h`
+});
+window.addEventListener('load',()=>{
+    handleMediaQuery(mediaQuery400)
+    handleMediaQuery(mediaQuery600)
+})
+
 //Event Listeners
 mediaQuery400.addEventListener('change',()=>{handleMediaQuery(mediaQuery400)});
 mediaQuery600.addEventListener('change',()=>{handleMediaQuery(mediaQuery600)});
@@ -469,6 +476,4 @@ pomoCounDiv.addEventListener('click',restartPomoCount);
 settingButton.addEventListener('click',showSettings)
 reportButton.addEventListener('click',showreports)
     //report
-hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h`
-    
 restartReportButton.addEventListener('click',()=>{myStorage.setItem('timeStudied', 0), hoursFocused.innerHTML = 0})
