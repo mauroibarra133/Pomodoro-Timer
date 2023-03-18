@@ -94,7 +94,8 @@ function changeTab(e){
             tab.classList.toggle('timer-pomo-active');
         }
     }
-    tictac.pause()
+    tictac.pause();
+    tictac.currentTime = 0;
     applyTabEffects(target,activeTab.childNodes[0]);
     target.classList.toggle('timer-pomo-active');
 
@@ -159,7 +160,7 @@ function saveTimeStudied(){
     }else{
         timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
         myStorage.setItem('timeStudied', timeStudied)
-        hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
+        hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/3600).toFixed(2)} h`
     }
 
 }
@@ -169,6 +170,7 @@ function nextTab(){
             if(tab.parentNode.matches('.timer-pomo-active')){
                 tab.parentNode.classList.toggle('timer-pomo-active');
                 tictac.pause();
+                tictac.currentTime = 0;
                 //if pomo's tab is active, and exist a added task, increment the hopeCount
                 if((tab.id == 'timer-pomo')){
                     taskHope = document.querySelector('.task-hope')
@@ -250,6 +252,7 @@ function handleChronometer(){
         startButton.childNodes[1].classList.toggle('start');
         nextButton.style.opacity= '0'
         tictac.pause();
+        tictac.currentTime = 0
     }
 }
 function restartPomoCount(){
@@ -468,7 +471,7 @@ function showreports(){
     const options = document.querySelector('.options');
     const reportClose = document.querySelector('.report-button')
 
-    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
+    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/3600).toFixed(2)} h`
     daysAccessed.innerHTML = dayCount;
 
     if(reportButton.classList.contains('report-active')){
