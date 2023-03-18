@@ -94,8 +94,10 @@ function changeTab(e){
             tab.classList.toggle('timer-pomo-active');
         }
     }
+    //pause the audio 
     tictac.pause();
     tictac.currentTime = 0;
+    
     applyTabEffects(target,activeTab.childNodes[0]);
     target.classList.toggle('timer-pomo-active');
 
