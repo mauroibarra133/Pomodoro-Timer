@@ -39,7 +39,7 @@ const restartReportButton = document.getElementById('restart-report');
 let dayCount =  0;
 //alarm
 let alarmSelected = 'alarm-beep';
-
+let tictac = new Audio('./rsc/audios/countdown-alarm.mp3')
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
     const timerShort = document.getElementById('timer-short');
@@ -94,6 +94,7 @@ function changeTab(e){
             tab.classList.toggle('timer-pomo-active');
         }
     }
+    tictac.pause()
     applyTabEffects(target,activeTab.childNodes[0]);
     target.classList.toggle('timer-pomo-active');
 
@@ -167,7 +168,7 @@ function nextTab(){
             //Change the active tab
             if(tab.parentNode.matches('.timer-pomo-active')){
                 tab.parentNode.classList.toggle('timer-pomo-active');
-
+                tictac.pause();
                 //if pomo's tab is active, and exist a added task, increment the hopeCount
                 if((tab.id == 'timer-pomo')){
                     taskHope = document.querySelector('.task-hope')
@@ -218,6 +219,7 @@ function handleChronometer(){
 
     //Run the clock when the button is in "start" mode
     if (startButton.childNodes[1].classList.contains('start')){
+            setTimeout(()=>{tictac.play();},400)
         idInterval = setInterval(()=>{
             initialSeconds -=  1
             let minutes = Math.floor(initialSeconds / 60)
@@ -227,6 +229,7 @@ function handleChronometer(){
             
             // if the clock get to 00:00, change the tab
             if(timer.textContent == '00:00'){
+                tictac.pause();
                 let alarma = new Audio(`./rsc/audios/${alarmSelected}.mp3`)
                 alarma.play();
                 setTimeout(()=>{
@@ -246,6 +249,7 @@ function handleChronometer(){
         startButton.childNodes[1].innerHTML = 'START'
         startButton.childNodes[1].classList.toggle('start');
         nextButton.style.opacity= '0'
+        tictac.pause();
     }
 }
 function restartPomoCount(){
@@ -421,7 +425,7 @@ function showSettings(){
         demoAudio.play();
         setTimeout(()=>{
             demoAudio.pause();
-        },3000)
+        },4000)
     })
     //When click in 'OK'
     OKsettingButton.addEventListener('click',()=>{
