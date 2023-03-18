@@ -505,7 +505,7 @@ header{
     text-transform: uppercase;
     font-size: .9rem;
 }
-.settings-timer-title, .settings-timer-long-interval h4, .report-timer-title{
+.settings-timer-title, .settings-timer-long-interval h4, .report-timer-title, .settings-timer-audio-title{
     font-size: .9rem;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 600;
@@ -525,7 +525,7 @@ header{
     align-items: center;
     justify-content: center;
 }
-.settings-timer-input input,.settings-timer-long-interval input{
+.settings-timer-input input,.settings-timer-long-interval input, .settings-timer-audio select, .settings-timer-audio option{
     width: 70px;
     border: 0;
     padding: .5rem;
@@ -616,6 +616,14 @@ header{
     cursor: pointer;
     background-color: #ddd;
 }
+.settings-timer-audio{
+    display: flex;
+    justify-content: space-between;
+}
+.settings-timer-audio select, .settings-timer-audio option{
+    width: 150px;
+}
+
 @media only screen and (min-width: 768px){
     .timer{
         padding: 1.2rem;

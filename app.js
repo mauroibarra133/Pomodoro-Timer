@@ -37,6 +37,8 @@ const hoursFocused = document.querySelector('.hours-focused');
 const daysAccessed = document.getElementById('days-accesed');
 const restartReportButton = document.getElementById('restart-report');
 let dayCount =  0;
+//alarm
+let alarmSelected = 'alarm-beep';
 
 function handleMediaQuery(mediaQuery){
     const timerPomo = document.getElementById('timer-pomo');
@@ -225,7 +227,7 @@ function handleChronometer(){
             
             // if the clock get to 00:00, change the tab
             if(timer.textContent == '00:00'){
-                let alarma = new Audio('./rsc/audios/alarm-beep.mp3')
+                let alarma = new Audio(`./rsc/audios/${alarmSelected}.mp3`)
                 alarma.play();
                 setTimeout(()=>{
                     alarma.pause()
@@ -388,8 +390,9 @@ function showSettings(){
     const settingsCruz = document.querySelector('.settings-header-cruz');
     const settings = document.querySelector('.settings');
     const options = document.querySelector('.options');
-    const report = document.querySelector('.report');
+    const selectInput = document.getElementById('alarm-audio');
 
+    //show the settings
     if(settingButton.classList.contains('setting-active')){
         options.style.height = '100vh';
         body.style.overflow = 'hidden';
@@ -411,6 +414,16 @@ function showSettings(){
         }
 
     });
+
+    //Play the audio to hear a demo
+    selectInput.addEventListener('change',async(e)=>{
+        let demoAudio = new Audio(`./rsc/audios/${e.target.value}.mp3`)
+        demoAudio.play();
+        setTimeout(()=>{
+            demoAudio.pause();
+        },3000)
+    })
+    //When click in 'OK'
     OKsettingButton.addEventListener('click',()=>{
 
         pomoValue = document.getElementById('pomo-value').value
@@ -437,6 +450,9 @@ function showSettings(){
                 }
             }
         }
+        //CHange the default audio alarm
+        alarmSelected = selectInput.value;
+
     body.style.overflow = 'scroll'; 
     });
 
@@ -541,4 +557,6 @@ restartReportButton.addEventListener('click',()=>{
     hoursFocused.innerHTML = 0;
     daysAccessed.innerHTML = 0;
 
-})
+});
+
+//options
