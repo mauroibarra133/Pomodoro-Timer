@@ -76,7 +76,7 @@ function handleMediaQuery(mediaQuery){
 
 function changeTab(e){
     let target = e.target;
-
+    let activeTab;
     //return the div
     while(target.tagName == 'FONT'){
         target = target.parentNode;
@@ -88,21 +88,25 @@ function changeTab(e){
     for(let tab of [pomoTab,shortTab,longTab]){
         tab = tab.parentNode
         if(tab.matches('.timer-pomo-active')){
+            activeTab = tab;
             tab.classList.toggle('timer-pomo-active');
         }
     }
+    applyTabEffects(target,activeTab.childNodes[0]);
     target.classList.toggle('timer-pomo-active');
-    applyTabEffects(target);
 
 }
 
-function applyTabEffects(target){
+function applyTabEffects(target,activeTab){
     const timerAdvice = document.getElementById('timer-advice')
     const root = document.documentElement.style;
-
     //Short tab
     if(target.childNodes[0].matches('#timer-short')){
-        saveTimeStudied()
+        if(activeTab.matches('#timer-long')){
+            console.log('La anterior fue long');
+        }else{
+            saveTimeStudied()
+        }
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#31834f')
@@ -124,7 +128,12 @@ function applyTabEffects(target){
     
     //Long tab
     }else if(target.childNodes[0].matches('#timer-long')){
-        saveTimeStudied()
+        if(activeTab.matches('#timer-short')){
+            console.log('La anterior fue short');
+
+        }else{
+            saveTimeStudied()
+        }
         clearInterval(idInterval)
         startButton.childNodes[1].innerHTML = 'START'
         root.setProperty('--bg-color','#84b6f4')
@@ -139,12 +148,20 @@ function saveTimeStudied(){
     let timeStudied = Number.parseInt(myStorage.getItem('timeStudied'))
     let minutesInTimer = Number.parseInt(timerNumber.textContent.slice(0,2))
     let secondsInTimer = Number.parseInt(timerNumber.textContent.slice(3,5))
-    timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
-    myStorage.setItem('timeStudied', timeStudied)
-    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
+    
+    if(myStorage.getItem('timeStudied')== NaN || myStorage.getItem('timeStudied')== null){
+        myStorage.setItem('timeStudied', 0)
+        timeStudied = (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer);
+        myStorage.setItem('timeStudied', timeStudied)
+    }else{
+        timeStudied += (pomoValue * 60)-(minutesInTimer * 60 + secondsInTimer)
+        myStorage.setItem('timeStudied', timeStudied)
+        hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(2)} h`
+    }
+
 }
 function nextTab(){
-
+    pomoValue = 25;
     for(let tab of [pomoTab,shortTab,longTab]){
             //Change the active tab
             if(tab.parentNode.matches('.timer-pomo-active')){
@@ -159,14 +176,14 @@ function nextTab(){
                     }
                     // If i did 3 pomodoros, it`s turn to go to the long tab
                     if (pomoCount % intervalValue == 0 && pomoCount!= 0){
-                        applyTabEffects(tab = longTab.parentNode)
+                        applyTabEffects(tab = longTab.parentNode,pomoTab)
                         longTab.parentNode.classList.toggle('timer-pomo-active');
                         pomoCount += 1
                         pomoCounDiv.innerHTML = `#${pomoCount}`
                         break;
                     // If i did less than 3 pomodoros, it`s turn to go to the short tab
                     }else{
-                        applyTabEffects(tab = shortTab.parentNode)
+                        applyTabEffects(tab = shortTab.parentNode,pomoTab)
                         shortTab.parentNode.classList.toggle('timer-pomo-active');
                         pomoCount += 1
                         pomoCounDiv.innerHTML = `#${pomoCount}`
@@ -174,12 +191,12 @@ function nextTab(){
                     }
                 // if short tab is active, go to pomo tab 
                 }else if((tab.id == 'timer-short')){
-                    applyTabEffects(tab = pomoTab.parentNode)
+                    applyTabEffects(tab = pomoTab.parentNode,shortTab)
                     pomoTab.parentNode.classList.toggle('timer-pomo-active');
                     break;
                 // if long tab is active, go to pomo tab 
                 }else if((tab.id == 'timer-long')){
-                    applyTabEffects(tab = pomoTab.parentNode)
+                    applyTabEffects(tab = pomoTab.parentNode,longTab)
                     pomoTab.parentNode.classList.toggle('timer-pomo-active');
                     break;
                 }
@@ -482,9 +499,10 @@ function countDays(){
     }
 
 }
+
 //runs when started
 window.addEventListener('DOMContentLoaded ',()=>{
-    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h`
+    hoursFocused.innerHTML = `${(parseFloat(myStorage.getItem('timeStudied'))/360).toFixed(3)} h` 
     daysAccessed.innerHTML = dayCount;
 
 });
