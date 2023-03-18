@@ -225,6 +225,11 @@ function handleChronometer(){
             
             // if the clock get to 00:00, change the tab
             if(timer.textContent == '00:00'){
+                let alarma = new Audio('./rsc/audios/alarm-beep.mp3')
+                alarma.play();
+                setTimeout(()=>{
+                    alarma.pause()
+                },3000)
                 nextTab();
             }
         },1000);
