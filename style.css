@@ -612,6 +612,10 @@ header{
     padding: .5rem;
     border-radius: 8px;
 }
+.report-restart-button:hover{
+    cursor: pointer;
+    background-color: #ddd;
+}
 @media only screen and (min-width: 768px){
     .timer{
         padding: 1.2rem;
