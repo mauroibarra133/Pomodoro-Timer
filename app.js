@@ -161,7 +161,6 @@ function saveTimeStudied(){
 
 }
 function nextTab(){
-    pomoValue = 25;
     for(let tab of [pomoTab,shortTab,longTab]){
             //Change the active tab
             if(tab.parentNode.matches('.timer-pomo-active')){
@@ -422,10 +421,13 @@ function showSettings(){
             //Change the number
             if(tab.parentNode.matches('.timer-pomo-active')){
                 if((tab.id == 'timer-pomo')){
+                    pomoValue > 99 ? pomoValue = 99 : pomoValue;
                     timerNumber.innerHTML = pomoValue.toString().length == 1 ? `0${pomoValue}:00` : `${pomoValue}:00`
                 }else if(tab.id == 'timer-short'){
+                    shortValue > 99 ? shortValue = 99 : shortValue;
                     timerNumber.innerHTML = shortValue.toString().length == 1 ? `0${shortValue}:00` : `${shortValue}:00`
                 }else if(tab.id == 'timer-long'){
+                    longValue > 99 ? longValue = 99 : longValue;
                     timerNumber.innerHTML = longValue.toString().length == 1 ? `0${longValue}:00` : `${longValue}:00`
                 }
             }
