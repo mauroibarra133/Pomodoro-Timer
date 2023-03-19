@@ -51,9 +51,9 @@ PomoTimer was developed by Mauro Ibarra.
 ###Follow Me
 If you enjoyed using this pomodoro timer and would like to stay up-to-date with my latest projects, you can follow me on Instagram and LinkedIn:
 
-Instagram:  [![Instagram](https://img.shields.io/badge/Instagram-%40mauritoibarra-red?logo=instagram)](https://www.instagram.com/nombre_de_usuario_de_instagram/)
+Instagram:  [![Instagram](https://img.shields.io/badge/Instagram-%40mauritoibarra-red?logo=instagram)](https://www.instagram.com/mauritoibarra/)
 
-LinkedIn:   [![LinkedIn](https://img.shields.io/badge/LinkedIn-URL%20del%20perfil%20de%20LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/mauro-ibarra-665323203/)
+LinkedIn:   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Mauro%20Ibarra-blue?logo=linkedin)](https://www.linkedin.com/in/mauro-ibarra-665323203/)
 
 I appreciate your support and feedback, and I hope this pomodoro timer helps you improve your productivity and reach your goals!
 
