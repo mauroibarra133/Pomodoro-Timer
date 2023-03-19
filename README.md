@@ -1,6 +1,7 @@
 # Pomodoro-Timer
 PomoTimer is a web application that helps you use the Pomodoro technique to concentrate more efficiently. It allows you to set and track the time you spend on a task, dividing it into periods of work and rest. Additionally, you can add tasks and predict how much time they will take. PomoTimer is built using HTML, CSS, and JavaScript.
 
+![Preview of the website](./rsc/img/pomotimer-preview.png)
 ### Features
 - Countdown timer: The main feature of the webpage is a pomodoro timer that allows users to set a timer for a specific work session, followed by a break session. The timer counts down and provides notifications when the session is over.
 
@@ -48,7 +49,7 @@ This webpage was developed using several technologies, including HTML, CSS, and 
 ### Credits
 PomoTimer was developed by Mauro Ibarra.
 
-###Follow Me
+### Follow Me
 If you enjoyed using this pomodoro timer and would like to stay up-to-date with my latest projects, you can follow me on Instagram and LinkedIn:
 
 Instagram:  [![Instagram](https://img.shields.io/badge/Instagram-%40mauritoibarra-red?logo=instagram)](https://www.instagram.com/mauritoibarra/)
